@@ -9,6 +9,10 @@ module UDRS
 
 			Mime::Type.register_alias('application/pdf', :pdf) if !Mime::Type.lookup_by_extension(:pdf)
 			Mime::Type.register_alias('application/octet-stream', :escp) if !Mime::Type.lookup_by_extension(:escp)
+
+			ActionController::MimeResponds::Collector.send(:define_method, 'udrs') do |&block|
+				return any(*%i(pdf escp), &block)
+			end
 		end
 	end
 end
