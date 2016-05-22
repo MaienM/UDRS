@@ -45,12 +45,12 @@ module UDRS
 				apply_bold(false)
 				apply_underline(:off)
 
+				# Open the cash drawer
+				@buffer << "#{ESC}p#{0.chr}#{100.chr}#{100.chr}"
+
 				# Render the items
 				render_item(container)
 				render_page_end(nil)
-
-				# Open the cash drawer
-				@buffer << "#{ESC}p#{0.chr}#{100.chr}#{100.chr}"
 
 				# Replace special characters
 				buffer = @buffer.dup
@@ -113,7 +113,7 @@ module UDRS
 				get_pl_ph = proc do |*params|
 					# From the docs:
 					# pL, pH specify the number of parameters after pH as (pL + pH*256)
-					return [params.size % 256, params.size / 256]
+					next [params.size % 256, params.size / 256]
 				end
 
 				# The way to build a single line/setting of the code

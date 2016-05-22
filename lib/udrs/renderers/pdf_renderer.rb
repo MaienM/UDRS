@@ -8,8 +8,6 @@ require 'barby/outputter/prawn_outputter'
 module UDRS
 	module Renderers
 		class PDFRenderer < Base
-			FORMAT_TIME = '%A %-d %B %Y %H:%M (%P)'
-
 			def render(container)
 				# Create the pdf
 				@pdf = Prawn::Document.new
