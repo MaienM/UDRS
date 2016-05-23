@@ -49,7 +49,7 @@ module UDRS
 				@buffer << "#{ESC}p#{0.chr}#{100.chr}#{100.chr}"
 
 				# Render the items
-				@last_item = :page_end
+				@last_added = :page_end
 				render_item(container)
 				render_page_end(nil)
 
@@ -69,10 +69,8 @@ module UDRS
 			##############################
 
 			def render_page_end(page_end)
-				return if @last_item == :page_end
-
 				# Cut the paper at page end
-				@buffer << "\n\n\n\n\n\x1DV1\n"
+				@buffer << "\n\n\n\n\n#{GS}V#{1.chr}" unless @last_added == :page_end
 
 				@last_item = :page_end
 			end
