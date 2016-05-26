@@ -33,10 +33,10 @@ module UDRS
 			SIZE_MAP = {
 				tiny: 9,
 				small: 11,
-				normal: 12,
-				medium: 14,
-				large: 16,
-				huge: 18,
+				normal: 11,
+				medium: 13,
+				large: 15,
+				huge: 17,
 			}
 
 			def render_page_end(page_end)

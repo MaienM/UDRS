@@ -24,17 +24,27 @@ module UDRS
 					# Make all the blocks have the same amount of lines
 					max_length = parts.map(&:size).max
 					column_widths.zip(parts).each do |width, lines|
+						next if width == 0
 						lines << (' ' * width) while lines.size < max_length
 					end
 
 					# Add lines
 					parts.transpose.each do |line_parts|
+						missing = @line_width
+
 						cells.zip(line_parts).each_with_index do |(cell, part), i|
-							@buffer << ' ' if i > 0
+							if i > 0
+								@buffer << ' '
+								missing -= 1
+							end
+
 							font(text_to_options(cell)) do
 								@buffer << part
+								missing -= part.size
 							end
 						end
+
+						@buffer << ' ' * missing
 					end
 				end
 
